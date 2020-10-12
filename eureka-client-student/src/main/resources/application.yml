@@ -1,0 +1,23 @@
+server:
+  port: 8762
+spring:
+  application:
+    name: eureka-client-student
+  jpa:
+    show-sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    database: mysql
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/test?serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:123456@localhost:8761/eureka/
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true

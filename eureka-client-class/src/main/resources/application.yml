@@ -1,0 +1,16 @@
+server:
+  port: 8763
+spring:
+  application:
+    name: eureka-client-class
+eureka:
+  client:
+    fetch-registry: true
+    service-url:
+      defaultZone: http://root:123456@localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+feign:
+  hystrix:
+    enabled: true

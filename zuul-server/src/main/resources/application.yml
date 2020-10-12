@@ -1,0 +1,35 @@
+server:
+  port: 8765
+spring:
+  application:
+    name: zuul-server
+  redis:
+    host: 127.0.0.1
+    password:
+    jedis:
+      pool:
+        min-idle: 0
+        max-idle: 8
+        max-wait: 2000
+        max-active: 8
+    port: 6379
+    database: 0
+zuul:
+  host:
+    socket-timeout-millis: 20000
+    connect-timeout-millis: 20000
+  routes:
+    class:
+      path: /class/**
+      serviceId: eureka-client-class
+      stripPrefix: false
+      sensitiveHeaders: Authorization
+eureka:
+  client:
+    fetch-registry: true
+    service-url:
+      defaultZone: http://root:123456@localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+

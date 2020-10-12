@@ -1,0 +1,35 @@
+server:
+  port: 8764
+
+spring:
+  application:
+    name: turbine
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://root:123456@localhost:8761/eureka/
+    fetch-registry: true
+turbine:
+  # 需要监控的应用名称，默认逗号隔开，内部使用Stringutils.commaDelimitedListToStringArray分割
+  app-config: eureka-client-student,eureka-client-class
+  # false 时 在本机才是时 监控中host集群数会为1了 因为本地host是一样的
+  combine-host-port: true
+  # 集群名称
+  cluster-name-expression: metadata['cluster']
+  aggregator:
+    cluster-config: sca
+  instanceUrlSuffix:
+    sca: /hystrix.stream
+feign:
+  hystrix:
+    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  # 访问/actuator/hystrix.stream能看到不断更新的监控流
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "localhost"

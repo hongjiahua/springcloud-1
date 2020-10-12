@@ -1,0 +1,17 @@
+server:
+  port: 8761
+spring:
+  application:
+    name: springcloud-1
+  security:
+    user:
+      name: root
+      password: 123456
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${spring.application.name}:${server.port}/eureka/
+    register-with-eureka: true
